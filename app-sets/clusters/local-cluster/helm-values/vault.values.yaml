@@ -1,0 +1,17 @@
+global:
+  openshift: true
+  namespace: vault
+
+#injector:
+#  image:
+#    repository: "registry.connect.redhat.com/hashicorp/vault-k8s"
+#    tag: "1.2.1-ubi"
+#
+#  agentImage:
+#    repository: "registry.connect.redhat.com/hashicorp/vault"
+#    tag: "1.14.0-ubi"
+
+#server:
+#  image:
+#    repository: "registry.connect.redhat.com/hashicorp/vault"
+#    tag: "1.14.0-ubi"

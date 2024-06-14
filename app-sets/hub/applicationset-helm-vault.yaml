@@ -1,0 +1,50 @@
+---
+# https://medium.com/@mprzygrodzki/argocd-applicationsset-with-helm-72bb6362d494
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-helm-vault
+  namespace: openshift-gitops
+spec:
+  generators:
+    - matrix:
+        generators:
+          - clusters:
+              selector:
+                matchLabels:
+                  vendor: OpenShift
+          - list:
+              elements:
+              - appName: vault
+                namespace: vault
+                helmRepoURL: 'https://helm.releases.hashicorp.com/'
+                helmRevision: 0.28.0
+                helmChartName: vault
+  template:
+    metadata:
+      name: "{{name}}-{{appName}}"
+      annotations:
+        argocd.argoproj.io/manifest-generate-paths: ".;.."
+    spec:
+      project: default
+      sources:
+        - chart: '{{helmChartName}}'
+          helm:
+            valueFiles:
+              - "$values/app-sets/clusters/{{name}}/helm-values/{{appName}}.values.yml"
+          repoURL: '{{helmRepoURL}}'
+          targetRevision: '{{helmRevision}}'
+        - ref: values
+          repoURL: 'https://github.com/kenmoini/argocd-policygen-helm-combo-wombo'
+          targetRevision: main
+      destination:
+        name: "{{name}}"
+        namespace: "{{namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+        retry:
+          limit: 2
