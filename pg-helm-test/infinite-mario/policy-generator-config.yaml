@@ -1,0 +1,19 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: acm-policy-infinite-mario
+policyDefaults:
+  complianceType: musthave
+  namespace: open-cluster-management-global-set
+  placement:
+    clusterSelector:
+      matchExpressions:
+        - key: vendor
+          operator: In
+          values:
+            - OpenShift
+policies:
+  - manifests:
+      - path: manifests/overlays/on-prem-clusters/
+    name: infinite-mario
+    remediationAction: enforce

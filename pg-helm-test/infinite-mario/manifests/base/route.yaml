@@ -1,0 +1,18 @@
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: infinite-mario
+  # namespace: infinite-mario
+  annotations:
+    argocd.argoproj.io/sync-wave: "15"
+spec:
+  to:
+    kind: Service
+    name: infinite-mario
+    weight: 100
+  port:
+    targetPort: "8080-tcp"
+  tls:
+    termination: edge
+  wildcardPolicy: None
