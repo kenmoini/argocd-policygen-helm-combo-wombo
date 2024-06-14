@@ -4,7 +4,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: cluster-helm-vault
-  namespace: openshift-gitops
+  #namespace: openshift-gitops
 spec:
   generators:
     - matrix:
@@ -31,7 +31,7 @@ spec:
         - chart: '{{helmChartName}}'
           helm:
             valueFiles:
-              - "$values/app-sets/clusters/{{name}}/helm-values/{{appName}}.values.yml"
+              - "$values/app-sets/clusters/{{name}}/helm-values/{{appName}}.values.yaml"
           repoURL: '{{helmRepoURL}}'
           targetRevision: '{{helmRevision}}'
         - ref: values
