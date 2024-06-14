@@ -1,6 +1,6 @@
 # ArgoCD + PolicyGenerator + Helm Combo Wombo
 
-> An example in how to get ArgoCD working with PolicyGenerators and Helm for the ultimate in templating fun.  Oh an an AppSet example too.
+> An example in how to get ArgoCD working with PolicyGenerators and Helm for the ultimate in templating fun.  Oh and an AppSet example too.
 
 ## Setup
 
