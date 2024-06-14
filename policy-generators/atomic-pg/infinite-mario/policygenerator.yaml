@@ -1,0 +1,23 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: infinite-mario-pg
+  #annotations:
+  #  argocd.argoproj.io/compare-options: IgnoreExtraneous
+placementBindingDefaults:
+  name: infinite-mario-pg-pb
+policyDefaults:
+  namespace: rhacm-policies
+  # Use the name of an existing placement rule
+  placement:
+    placementRuleName: infinite-mario-clusters
+  remediationAction: enforce
+  severity: high
+  consolidateManifests: false # Put each object in its own ConfigurationPolicy in the Policy
+  #policySets:
+  #  - infinite-mario
+policies:
+  - name: infinite-mario
+    manifests:
+      - path: manifests

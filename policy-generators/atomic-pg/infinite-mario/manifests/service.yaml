@@ -1,0 +1,23 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: infinite-mario
+  # namespace: infinite-mario
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+  labels:
+    app: infinite-mario
+    app.kubernetes.io/component: web-app
+    app.kubernetes.io/instance: infinite-mario
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: infinite-mario
+    deploymentconfig: infinite-mario
+  type: ClusterIP
+  sessionAffinity: None
