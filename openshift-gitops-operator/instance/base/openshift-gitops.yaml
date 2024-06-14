@@ -104,6 +104,13 @@ spec:
       kinds:
       - TaskRun
       - PipelineRun
+    - apiGroups:
+      - admissionregistration.k8s.io
+      clusters:
+      - '*'
+      kinds:
+      - MutatingWebhookConfiguration
+      - ValidatingWebhookConfiguration
   ha:
     enabled: false
     resources:
